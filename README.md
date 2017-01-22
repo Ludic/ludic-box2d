@@ -1,33 +1,17 @@
-# EiN.js 
-####A Simple Entity Component System####
+# ludic-box2d
+####A Box2D Ludic extension
 
 
 ## Installing
 
 #### jspm
 
-`jspm install ein=github:Ludic/ein`
+`jspm install ein=github:Ludic/ludic-box2d`
 
 #### webpack
 
-`npm install github:Ludic/ein`
+`npm install github:Ludic/ludic-box2d`
 
 ## Testing
-`npm run test`
-
-## Using
-```javascript
-import em from 'EiN'
-
-var someEntity = new SomeEntity();
-em.addEntity(sameEntity);
-em.update(delta);
-```
-
-## Resources
-
-* [Example Games](https://github.com/SoftwareSyndicate/Ludic/wiki/ExampleGames)
-* [API Reference](https://github.com/SoftwareSyndicate/EiN/wiki/API)
-
-***
+`npm run devtest`
 
