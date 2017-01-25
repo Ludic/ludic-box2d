@@ -1,3 +1,6 @@
+// box2d
+export {default as box2d} from 'box2d'
+
 // debug draw
 export {default as DebugDraw} from './debugDraw.js'
 

@@ -13,6 +13,7 @@ module.exports = {
     path: __dirname + '/dist',
     filename: "main.js"
   },
+  target: 'node',
   module: {
     loaders: [
       {

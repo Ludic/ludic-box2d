@@ -1,20 +1,19 @@
-
 class WorldConfig {
-
-  PTM : 32;
-
-  canvasOffset : {
-    x: 0,
-    y: 0
-  }
-
-  mousePosPixel : {
-    x: 0,
-    y: 0
-  }
-
+  
   constructor(canvas) {
     this.canvas = canvas;
+
+    this.PTM = 32;
+    
+    this.canvasOffset = {
+      x: 0,
+      y: 0
+    }
+
+    this.mousePosPixel = {
+      x: 0,
+      y: 0
+    }
   }
 
   getWorldPointFromPixelPoint(pixelPoint) {
