@@ -43,9 +43,7 @@
     "webpack-dev-server": "^2.2.0"
   },
   "dependencies": {
-    "Ludic": "github:ludic/ludic"
-  },
-  "peerDependencies": {
+    "Ludic": "github:ludic/ludic",
     "box2d": "github:ludic/box2d"
-  }
+  },
 }
