@@ -45,5 +45,5 @@
   "dependencies": {
     "Ludic": "github:ludic/ludic",
     "box2d": "github:ludic/box2d"
-  },
+  }
 }
