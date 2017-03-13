@@ -48,7 +48,6 @@ module.exports = {
   resolve: {
     alias: {
       src: path.resolve(__dirname, 'src/'),
-      'b2d$': 'src/box2d/b2d.js',
       // 'box2d$': path.resolve(__dirname, 'node_modules/box2d/build/Box2d_v2.3.1_min.js')
     },
     extensions: ['.js', '.scss', '.json'],

@@ -1,4 +1,4 @@
-import Box2D from 'b2d';
+import Box2D from 'src/box2d/b2d';
 import {Util} from 'ludic';
 
 // var canvasOffset = {

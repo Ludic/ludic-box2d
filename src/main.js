@@ -1,5 +1,5 @@
 // box2d
-export {default as Box2D, default as default} from 'b2d' // this is a shim
+export {default as Box2D, default as default} from './box2d/b2d' // this is a shim
 
 // debug draw
 export {default as DebugDraw} from './box2d/debugDraw'
