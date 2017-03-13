@@ -1,5 +1,5 @@
-import Box2D from 'box2d';
-import {Util} from 'Ludic';
+import Box2D from 'b2d';
+import {Util} from 'ludic';
 
 class DebugDraw {
   constructor(canvas) {
@@ -12,7 +12,7 @@ class DebugDraw {
 
   static newDebugger(canvas) {
     var d = new DebugDraw(canvas);
-    return d.getCanvasDebugDraw();
+    return d.debugDraw;
   }
 
   initBits(){
@@ -111,21 +111,23 @@ class DebugDraw {
 
   getCanvasDebugDraw() {
       var debugDraw = new Box2D.JSDraw();
-
       var self = this;
       debugDraw.DrawSegment = function(vert1, vert2, color) {
           self.setColorFromDebugDrawCallback(color);
           self.saveContext('draw segment');
+          console.log('draw seg');
           self.drawSegment(vert1, vert2);
       };
 
       debugDraw.DrawPolygon = function(vertices, vertexCount, color) {
+        console.log('draw poly');
           self.setColorFromDebugDrawCallback(color);
           self.saveContext('draw polygon');
           self.drawPolygon(vertices, vertexCount, false);
       };
 
       debugDraw.DrawSolidPolygon = function(vertices, vertexCount, color) {
+        console.log('draw solid poly');
           self.setColorFromDebugDrawCallback(color);
           self.saveContext('draw solid polygon');
           self.drawPolygon(vertices, vertexCount, true);

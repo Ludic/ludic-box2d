@@ -1,5 +1,5 @@
-import Box2D from 'box2d';
-import {Util} from 'Ludic';
+import Box2D from 'b2d';
+import {Util} from 'ludic';
 
 // var canvasOffset = {
 //   x: 0,
@@ -7,11 +7,17 @@ import {Util} from 'Ludic';
 // };
 
 class World {
-  constructor(b2Vec2) {
-    var x = Util.readConfig('world','gravity.x',0),
-        y = Util.readConfig('world','gravity.y',0);
 
-    b2Vec2 = b2Vec2 || new Box2D.b2Vec2(x,y);
+  constructor(b2Vec2, y) {
+    if(!(b2Vec2 instanceof Box2D.b2Vec2) && typeof b2Vec2 === 'number' && arguments.length === 2){
+      // read arg[0] as x coord
+      b2Vec2 = new Box2D.b2Vec2(b2Vec2, y)
+    } else if(arguments.length === 0){
+      b2Vec2 = new Box2D.b2Vec2(0,0)
+    } else {
+      throw "Improper arguments for World"
+    }
+
     this.world = new Box2D.b2World(b2Vec2);
     Util.using(this,this.world);
     this.config = Util.readConfig('world');
@@ -30,7 +36,7 @@ class World {
     this.world.SetContactListener(this._contactListener);
   }
 
-  drawDebug(override){
+  drawDebug(override=false){
     if(this.config.drawDebug || override){
       this.world.DrawDebugData();
     }
@@ -113,10 +119,7 @@ class World {
     }
   }
 
-  step(delta,a,b){
-    delta = (delta!==undefined && delta!==null) ? delta : 0;
-    a = (a!==undefined && a!==null) ? a : 3;
-    b = (b!==undefined && b!==null) ? b : 2;
+  step(delta=0,a=3,b=2){
     if(this.stepWorld){
       this.world.Step(delta, a, b);
     }
