@@ -1,13 +1,12 @@
 import Box2D from './b2d';
-import {Util} from 'ludic';
+import {utils} from 'ludic';
 
 class DebugDraw {
   constructor(canvas) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
     this.debugDraw = this.getCanvasDebugDraw();
-    // console.log(Util.using);
-    Util.using(this,this.debugDraw,true);
+    utils.using(this,this.debugDraw,true);
   }
 
   static newDebugger(canvas) {

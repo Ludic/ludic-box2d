@@ -1,5 +1,5 @@
 import Box2D from './b2d';
-import {Util} from 'ludic';
+import {utils} from 'ludic';
 
 // var canvasOffset = {
 //   x: 0,
@@ -19,8 +19,7 @@ class World {
     }
 
     this.world = new Box2D.b2World(b2Vec2);
-    Util.using(this,this.world);
-    this.config = Util.readConfig('world');
+    utils.using(this,this.world);
     this.enableStep();
 
     // contact stuff
@@ -37,9 +36,7 @@ class World {
   }
 
   drawDebug(override=false){
-    if(this.config.drawDebug || override){
-      this.world.DrawDebugData();
-    }
+    this.world.DrawDebugData();
   }
 
   onContact(begin){
