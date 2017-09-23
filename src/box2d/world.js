@@ -19,14 +19,13 @@ class World {
     }
 
     this.world = new Box2D.b2World(b2Vec2);
-    utils.using(this,this.world);
+    utils.using(this, this.world)
     this.enableStep();
 
     // contact stuff
     this._contactListeners = [];
     this._contactListener = new Box2D.JSContactListener();
 
-    //If the Contact involved the Player (check if entityA or entityB)
     this._contactListener.BeginContact = this.onContact(true).bind(this);
     this._contactListener.EndContact = this.onContact(false).bind(this);
     this._contactListener.PreSolve = function() {};
