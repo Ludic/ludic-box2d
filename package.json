@@ -6,9 +6,9 @@
   "module": "src/main.js",
   "scripts": {
     "test": "mocha-webpack --webpack-config webpack.config-test.js --watch \"tests/**/*.js\"",
-    "devtest": "webpack-dev-server --config ./webpack.test.config.js",
+    "dev:test": "webpack-dev-server --config ./webpack.test.config.js",
     "dev": "webpack --watch --config ./webpack.dev.config.js",
-    "build": "webpack --progress --config ./webpack.dev.config.js"
+    "build": "webpack --progress --config ./webpack.build.config.js"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,8 @@
     "sinon-chai": "^2.8.0",
     "systemjs": "^0.18.14",
     "webpack": "^2.2.0",
-    "webpack-dev-server": "^2.2.0"
+    "webpack-dev-server": "^2.2.0",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "box2d": "github:ludic/box2d"
