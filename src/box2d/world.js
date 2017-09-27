@@ -21,7 +21,7 @@ export default class World {
     this.world = new Box2D.b2World(b2Vec2);
     utils.using(this, this.world)
     this.enableStep();
-    console.log('world')
+
     // contact stuff
     this._contactListeners = [];
     this._contactListener = new Box2D.JSContactListener();

@@ -928,7 +928,7 @@ var World = function () {
     this.world = new __WEBPACK_IMPORTED_MODULE_0__b2d__["a" /* default */].b2World(b2Vec2);
     __WEBPACK_IMPORTED_MODULE_1_ludic__["utils"].using(this, this.world);
     this.enableStep();
-    console.log('world');
+
     // contact stuff
     this._contactListeners = [];
     this._contactListener = new __WEBPACK_IMPORTED_MODULE_0__b2d__["a" /* default */].JSContactListener();
