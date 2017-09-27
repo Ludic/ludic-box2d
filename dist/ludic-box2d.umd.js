@@ -1061,6 +1061,8 @@ var World = function () {
   return World;
 }();
 
+/* harmony default export */ __webpack_exports__["a"] = World;
+
 var ContactListener = function ContactListener(body, className, callback) {
   _classCallCheck(this, ContactListener);
 
@@ -1073,8 +1075,6 @@ var ContactListener = function ContactListener(body, className, callback) {
   this.className = className;
   this.callback = callback;
 };
-
-/* harmony default export */ __webpack_exports__["a"] = World;
 
 /***/ }),
 /* 6 */
