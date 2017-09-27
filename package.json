@@ -2,8 +2,8 @@
   "name": "ludic-box2d",
   "version": "1.0.0",
   "description": "A Box2d Ludic extension",
-  "main": "dist/main.js",
-  "module": "src/main.js",
+  "main": "dist/ludic-box2d.umd.js",
+  "module": "dist/ludic-box2d.umd.js",
   "scripts": {
     "test": "mocha-webpack --webpack-config webpack.config-test.js --watch \"tests/**/*.js\"",
     "dev:test": "webpack-dev-server --config ./webpack.test.config.js",

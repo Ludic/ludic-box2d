@@ -6,7 +6,7 @@ import {utils} from 'ludic';
 //   y: 0
 // };
 
-class World {
+export default class World {
 
   constructor(b2Vec2, y) {
     if(!(b2Vec2 instanceof Box2D.b2Vec2) && typeof b2Vec2 === 'number' && arguments.length === 2){
@@ -147,5 +147,3 @@ class ContactListener {
     this.callback = callback;
   }
 }
-
-export default World;
