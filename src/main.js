@@ -1,5 +1,5 @@
 // box2d
-export {default as Box2D, default as default} from './box2d/b2d' // this is a shim
+export {default as Box2D} from './box2d/box2d' // this is a shim
 
 // debug draw
 export {default as DebugDraw} from './box2d/debugDraw'
@@ -11,3 +11,8 @@ export {default as World} from './box2d/world'
 export {default as RubeLoader} from './rube/RubeLoader'
 export {default as RubeScene} from './rube/RubeScene'
 export {default as RubeAssetLoader} from './rube/rubeAssetLoader'
+
+export default function(a){
+  // TODO: Make this a ludic plugin and then create a LudicApp.ready to instantiate it
+  console.log(a)
+}

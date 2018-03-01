@@ -1,4 +1,4 @@
-import Box2D from './b2d';
+import Box2D from './box2d';
 import {utils} from 'ludic';
 
 class DebugDraw {

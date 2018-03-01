@@ -16,13 +16,9 @@ module.exports = {
   },
   target: 'web',
   node: {
-    // fs: 'empty',
-    // net: 'empty',
+    fs: 'empty',
   },
   module: {
-    noParse: [
-      /Box2D_v2/,
-    ],
     loaders: [
       {
         test: /\.js$/,
@@ -39,11 +35,14 @@ module.exports = {
         test: /\.css$/,
         loader: "style!css",
       },
-      // {
-      //   test: require.resolve('box2d'),
-      //   // loader: "imports-loader?require=>false",
-      //   loader: "script-loader",
-      // },
+      {
+        test: require.resolve('box2d/build/Box2D_v2.3.1_min.wasm.js'),
+        use: 'exports-loader?Box2D',
+      },
+      {
+        test: require.resolve('box2d/build/Box2D_v2.3.1_min.wasm.wasm'),
+        loaders: ['arraybuffer-loader'],
+      },
     ]
   },
   resolve: {
