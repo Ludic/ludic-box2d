@@ -1,5 +1,5 @@
 {
-  "name": "ludic-box2d",
+  "name": "@ludic/ludic-box2d",
   "version": "1.0.0",
   "description": "A Box2d Ludic extension",
   "main": "dist/ludic-box2d.umd.js",
