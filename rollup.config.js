@@ -8,14 +8,14 @@ import pkg from './package.json'
 export default [
 	// browser-friendly UMD build
 	{
-		input: 'src/main.js',
+		input: 'src/index.js',
 		output: {
 			name: 'ludic-box2d',
 			file: pkg.browser,
 			format: 'umd'
 		},
 		plugins: [
-			resolve(),  // so Rollup can find `ms`
+			resolve(),  // so Rollup can find ludic, box2d
 			commonjs(), // so Rollup can convert `ms` to an ES module
       wasm(),     // so Rollup can import wasm files
       buble()
@@ -29,14 +29,14 @@ export default [
 	// an array for the `output` option, where we can specify
 	// `file` and `format` for each target)
 	{
-		input: 'src/main.js',
-		external: ['ludic', 'box2d'],
+		input: 'src/index.js',
+		// external: ['box2d'],
 		output: [
 			{ file: pkg.main, format: 'cjs' },
 			{ file: pkg.module, format: 'es' }
 		],
 		plugins: [
-			resolve(),  // so Rollup can find `ms`
+			resolve(),  // so Rollup can find ludic, box2d
 			commonjs(), // so Rollup can convert `ms` to an ES module
       wasm(),     // so Rollup can import wasm files
       buble()

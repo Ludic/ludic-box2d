@@ -1,5 +1,5 @@
 import Box2D from './box2d';
-import {utils} from 'ludic';
+// import {utils} from 'ludic';
 
 
 export default class World {
@@ -15,7 +15,7 @@ export default class World {
     }
 
     this.world = new Box2D.b2World(b2Vec2);
-    utils.using(this, this.world)
+    // utils.using(this, this.world)
     this.enableStep();
 
     // contact stuff
