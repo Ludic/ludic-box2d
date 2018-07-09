@@ -119,14 +119,14 @@ class DebugDraw {
       };
 
       debugDraw.DrawPolygon = function(vertices, vertexCount, color) {
-        console.log('draw poly');
+        // console.log('draw poly');
           self.setColorFromDebugDrawCallback(color);
           self.saveContext('draw polygon');
           self.drawPolygon(vertices, vertexCount, false);
       };
 
       debugDraw.DrawSolidPolygon = function(vertices, vertexCount, color) {
-        console.log('draw solid poly');
+        // console.log('draw solid poly');
           self.setColorFromDebugDrawCallback(color);
           self.saveContext('draw solid polygon');
           self.drawPolygon(vertices, vertexCount, true);
