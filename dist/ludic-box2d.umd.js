@@ -87,7 +87,46 @@ return /******/ (function(modules) { // webpackBootstrap
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_box2d_build_Box2D_v2_3_1_min_wasm_wasm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_box2d_build_Box2D_v2_3_1_min_wasm_wasm__);
 
 
-/* harmony default export */ __webpack_exports__["a"] = __WEBPACK_IMPORTED_MODULE_0_box2d_build_Box2D_v2_3_1_min_wasm_js___default()({ wasmBinary: __WEBPACK_IMPORTED_MODULE_1_box2d_build_Box2D_v2_3_1_min_wasm_wasm___default.a });
+var b2d = __WEBPACK_IMPORTED_MODULE_0_box2d_build_Box2D_v2_3_1_min_wasm_js___default()({ wasmBinary: __WEBPACK_IMPORTED_MODULE_1_box2d_build_Box2D_v2_3_1_min_wasm_wasm___default.a }).then(function (b2) {
+  // setup some helper stuff
+
+  // augment b2Vec2 with x,y getters/setters
+  Object.defineProperties(b2.b2Vec2.prototype, {
+    x: {
+      get: function get() {
+        return this.get_x();
+      },
+      set: function set(val) {
+        this.set_x(val);
+      }
+    },
+    y: {
+      get: function get() {
+        return this.get_y();
+      },
+      set: function set(val) {
+        this.set_y(val);
+      }
+    }
+  });
+
+  // augment b2Body with propery user data values
+  Object.defineProperties(b2.b2Body.prototype, {
+    SetUserData: {
+      value: function value(val) {
+        this.__userData = val;
+      }
+    },
+    GetUserData: {
+      value: function value() {
+        return this.__userData;
+      }
+    }
+  });
+
+  return b2;
+});
+/* harmony default export */ __webpack_exports__["a"] = b2d;
 
 /***/ }),
 /* 1 */
