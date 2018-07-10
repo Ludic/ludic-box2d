@@ -85,28 +85,98 @@ return /******/ (function(modules) { // webpackBootstrap
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_box2d_build_Box2D_v2_3_1_min_wasm_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_box2d_build_Box2D_v2_3_1_min_wasm_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_box2d_build_Box2D_v2_3_1_min_wasm_wasm__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_box2d_build_Box2D_v2_3_1_min_wasm_wasm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_box2d_build_Box2D_v2_3_1_min_wasm_wasm__);
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+
+
+
+var definePropertiesForPrototype = function definePropertiesForPrototype(pt) {
+  return function (property) {
+    var oldProperty = property;
+    if (Array.isArray(property)) {
+      var _property = property,
+          _property2 = _slicedToArray(_property, 2),
+          prop = _property2[0],
+          oldProp = _property2[1];
+
+      property = prop;
+      oldProperty = oldProp;
+    }
+    Object.defineProperty(pt, property, {
+      get: function get() {
+        try {
+          return this['get_' + oldProperty]();
+        } catch (error) {
+          console.error('[Ludic Box2D] could not get property \'' + oldProperty + '\'', propery, pt, this);
+        }
+      },
+      set: function set(val) {
+        try {
+          this['set_' + oldProperty](val);
+        } catch (error) {
+          console.error('[Ludic Box2D] could not set value "' + val + '" for property \'' + oldProperty + '\'', val, propery, pt, this);
+        }
+      }
+    });
+  };
+};
 
 var b2d = __WEBPACK_IMPORTED_MODULE_0_box2d_build_Box2D_v2_3_1_min_wasm_js___default()({ wasmBinary: __WEBPACK_IMPORTED_MODULE_1_box2d_build_Box2D_v2_3_1_min_wasm_wasm___default.a }).then(function (b2) {
   // setup some helper stuff
 
-  // augment b2Vec2 with x,y getters/setters
-  Object.defineProperties(b2.b2Vec2.prototype, {
-    x: {
-      get: function get() {
-        return this.get_x();
-      },
-      set: function set(val) {
-        this.set_x(val);
-      }
-    },
-    y: {
-      get: function get() {
-        return this.get_y();
-      },
-      set: function set(val) {
-        this.set_y(val);
-      }
+  // define all the property getter/setters for modules that have them
+  var modules = {
+    b2Vec2: ['x', 'y'],
+    b2Vec3: ['x', 'y', 'z'],
+    b2Mat22: ['ex', 'ey'],
+    b2Mat33: ['ex', 'ey', 'ez'],
+    b2RayCastInput: ['p1', 'p2', 'maxFriction'],
+    b2RayCastOutput: ['normal', 'fraction'],
+    b2Shape: [['type', 'm_type'], ['radius', 'm_radius']],
+    b2CircleShape: [['p', 'm_p']],
+    b2EdgeShape: [['vertex1', 'm_vertex1'], ['vertex2', 'm_vertex2'], ['vertex0', 'm_vertex0'], ['vertex3', 'm_vertex3'], ['hasVertex0', 'm_hasVertex0'], ['hasVertex3', 'm_hasVertex3']],
+    b2ChainShape: [['vertices', 'm_vertices'], ['count', 'm_count'], ['prevVertex', 'm_prevVertex'], ['nextVertex', 'm_nextVertex'], ['hasPrevVertex', 'm_hasPrevVertex'], ['hasNextVertex', 'm_hasNextVertex']],
+    b2PolygonShape: [['centroid', 'm_centroid'], ['vertices', 'm_vertices'], ['normals', 'm_normals'], ['count', 'm_count']],
+    b2FixtureDef: ['shape', 'userData', 'friction', 'restitution', 'density', 'isSensor', 'filter'],
+    b2BodyDef: ['type', 'position', 'angle', 'linearVelocity', 'angularVelocity', 'linearDamping', 'angularDamping', 'allowSleep', 'awake', 'fixedRotation', 'bullet', 'active', 'userData', 'gravityScale'],
+    b2JointDef: ['type', 'userData', 'bodyA', 'bodyB', 'collideConnected'],
+    b2WeldJointDef: ['localAnchorA', 'localAnchorB', 'referenceAngle', 'frequencyHz', 'dampingRatio'],
+    b2DistanceJointDef: ['localAnchorA', 'localAnchorB', 'length', 'frequencyHz', 'dampingRatio'],
+    b2FrictionJointDef: ['localAnchorA', 'localAnchorB', 'maxForce', 'maxTorque'],
+    b2GearJointDef: ['joint1', 'joint2', 'ratio'],
+    b2MouseJointDef: ['target', 'maxForce', 'frequencyHz', 'dampingRatio'],
+    b2PrismaticJointDef: ['localAnchorA', 'localAnchorB', 'localAxisA', 'referenceAngle', 'enableLimit', 'lowerTranslation', 'upperTranslation', 'enableMotor', 'maxMotorForce', 'motorSpeed'],
+    b2JointEdge: ['other', 'joint', 'next', 'prev'],
+    b2PulleyJointDef: ['groundAnchorA', 'groundAnchorB', 'localAnchorA', 'localAnchorB', 'lengthA', 'lengthB', 'ratio'],
+    b2RevoluteJointDef: ['localAnchorA', 'localAnchorB', 'referenceAngle', 'enableLimit', 'lowerAngle', 'upperAngle', 'enableMotor', 'motorSpeed', 'maxMotorTorque'],
+    b2RopeJointDef: ['localAnchorA', 'localAnchorB', 'maxLength'],
+    b2WheelJointDef: ['localAnchorA', 'localAnchorB', 'localAxisA', 'enableMotor', 'maxMotorTorque', 'motorSpeed', 'frequencyHz', 'dampingRatio'],
+    b2MotorJointDef: ['linearOffset', 'angularOffset', 'maxForce', 'maxTorque', 'correctionFactor'],
+    b2Manifold: ['localNormal', 'localPoint', 'type', 'pointCount'],
+    // b2WorldManifold: ['normal', 'points', 'separations'],
+    b2ManifoldPoint: ['localPoint', 'normalImpulse', 'tangentImpulse', 'id'],
+    b2Filter: ['categoryBits', 'maskBits', 'groupIndex'],
+    b2Transform: ['q', 'p'],
+    b2MassData: ['mass', 'center', 'I'],
+    b2Profile: ['step', 'collide', 'solve', 'solveInit', 'solveVelocity', 'solvePosition', 'broadphase', 'solveTOI'],
+    b2AABB: ['lowerBound', 'upperBound'],
+    b2Color: ['r', 'g', 'b'],
+    b2Rot: ['s', 'c'],
+    b2ContactEdge: ['other', 'contact', 'next', 'prev'],
+    b2ContactFeature: ['indexA', 'indexB', 'typeA', 'typeB'],
+    b2ContactID: ['cf', 'key'],
+    b2ContactImpulse: ['count']
+
+  };
+  Object.entries(modules).forEach(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        module = _ref2[0],
+        keys = _ref2[1];
+
+    if (b2[module]) {
+      keys.forEach(definePropertiesForPrototype(b2[module].prototype));
+    } else {
+      console.log('module fail', module);
     }
   });
 
@@ -122,6 +192,28 @@ var b2d = __WEBPACK_IMPORTED_MODULE_0_box2d_build_Box2D_v2_3_1_min_wasm_js___def
         return this.__userData;
       }
     }
+  });
+
+  // define the enums as the are in the def file
+  var enums = {
+    b2ShapeType: ['circle', 'edge', 'polygon', 'chain'],
+    b2BodyType: ['static', 'kinematic', 'dynamic'],
+    b2JointType: ['unknown', 'revolute', 'prismatic', 'distance', 'pulley', 'mouse', 'gear', 'wheel', 'weld', 'friction', 'rope', 'motor'],
+    b2LimitState: ['inactive', 'atLower', 'atUpper', 'equal'],
+    b2ContactFeatureType: ['vertex', 'face'],
+    b2DrawFlag: ['shapeBit', 'jointBit', 'aabbBit', 'pairBit', 'centerOfMassBit'],
+    b2ManifoldType: ['circles', 'faceA', 'faceB']
+
+  };
+  Object.entries(enums).forEach(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+        module = _ref4[0],
+        keys = _ref4[1];
+
+    b2[module] = keys.reduce(function (mod, key, index) {
+      mod[key] = index;
+      return mod;
+    }, {});
   });
 
   return b2;
