@@ -1,13 +1,26 @@
-export class World extends Box2D.b2World {
+
+class World extends Box2D.b2World {
   world: Box2D.b2World
   constructor(gravityVector: Box2D.b2Vec2)
   constructor(gravityX: number, gravityY: number)
   drawDebug(): void
   step(delta: number, a: number, b: number): void
+  registerBodyContactListener(listener: ContactListener): void
+  newBodyContactListener(callback: (begin: boolean, contact: Box2D.b2Contact)=>void, addAlso?: boolean): void
   enableStep(): void
   disableStep(): void
   destroy(): void
+  // static ContactListener: ContactListener
 }
+
+namespace World {
+  export class ContactListener {
+    callback: (begin: boolean, contact: Box2D.b2Contact)=>void
+    constructor(cb: (begin: boolean, contactBody: Box2D.b2Body)=>void)
+  }
+}
+
+export const World 
 
 export namespace Box2D {  
 

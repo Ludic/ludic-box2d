@@ -1140,7 +1140,7 @@ var DebugDraw = function () {
             };
 
             debugDraw.DrawPolygon = function (vertices, vertexCount, color) {
-                // console.log('draw poly');
+                console.log('draw poly');
                 self.setColorFromDebugDrawCallback(color);
                 self.saveContext('draw polygon');
                 self.drawPolygon(vertices, vertexCount, false);
@@ -1267,19 +1267,7 @@ var World = function () {
         var listener;
         for (var i = 0; i < this._contactListeners.length; i++) {
           listener = this._contactListeners[i];
-          var contactObject = this.bodyInvolvedInContact(listener.body, contactPtr);
-
-          if (contactObject) {
-            if (listener.className) {
-              if (contactObject.entityData.constructor.name === listener.className) {
-                listener.callback(begin, contactObject);
-              }
-            } else {
-              listener.callback(begin, contactObject);
-            }
-          } else {
-            continue;
-          }
+          listener.callback(begin, __WEBPACK_IMPORTED_MODULE_0__box2d__["a" /* default */].wrapPointer(contactPtr, __WEBPACK_IMPORTED_MODULE_0__box2d__["a" /* default */].b2Contact));
         }
       };
     }
@@ -1319,8 +1307,8 @@ var World = function () {
     }
   }, {
     key: 'newBodyContactListener',
-    value: function newBodyContactListener(body, className, callback, addAlso) {
-      var cl = new ContactListener(body, className, callback);
+    value: function newBodyContactListener(callback, addAlso) {
+      var cl = new ContactListener(callback);
 
       if (addAlso) {
         this.registerBodyContactListener(cl);
@@ -1332,12 +1320,22 @@ var World = function () {
     key: 'bodyInvolvedInContact',
     value: function bodyInvolvedInContact(body, contactPtr) {
       var contact = __WEBPACK_IMPORTED_MODULE_0__box2d__["a" /* default */].wrapPointer(contactPtr, __WEBPACK_IMPORTED_MODULE_0__box2d__["a" /* default */].b2Contact);
-      var bodyA = contact.GetFixtureA().GetBody();
-      var bodyB = contact.GetFixtureB().GetBody();
+      var fixtureA = contact.GetFixtureA();
+      var bodyA = fixtureA.GetBody();
+      var fixtureB = contact.GetFixtureB();
+      var bodyB = fixtureB.GetBody();
       if (bodyA == body) {
-        return bodyB;
+        return {
+          contact: contact,
+          body: bodyB,
+          fixture: fixtureB
+        };
       } else if (bodyB == body) {
-        return bodyA;
+        return {
+          contact: contact,
+          body: bodyA,
+          fixture: fixtureA
+        };
       } else {
         return false;
       }
@@ -1375,18 +1373,13 @@ var World = function () {
 
 /* harmony default export */ __webpack_exports__["a"] = World;
 
-var ContactListener = function ContactListener(body, className, callback) {
+var ContactListener = function ContactListener(callback) {
   _classCallCheck(this, ContactListener);
 
-  if (typeof className === 'function') {
-    callback = className;
-    className = false;
-  }
-
-  this.body = body;
-  this.className = className;
   this.callback = callback;
 };
+
+World.ContactListener = ContactListener;
 
 /***/ }),
 /* 7 */

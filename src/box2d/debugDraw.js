@@ -114,7 +114,7 @@ class DebugDraw {
       debugDraw.DrawSegment = function(vert1, vert2, color) {
           self.setColorFromDebugDrawCallback(color);
           self.saveContext('draw segment');
-          console.log('draw seg');
+          // console.log('draw seg');
           self.drawSegment(vert1, vert2);
       };
 

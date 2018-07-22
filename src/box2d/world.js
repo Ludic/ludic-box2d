@@ -38,20 +38,8 @@ export default class World {
     return function(contactPtr){
       var listener;
       for(var i=0;i<this._contactListeners.length;i++){
-        listener = this._contactListeners[i];
-        var contactObject = this.bodyInvolvedInContact(listener.body, contactPtr);
-
-        if(contactObject){
-          if(listener.className) {
-            if( contactObject.entityData.constructor.name === listener.className){
-              listener.callback(begin, contactObject);
-            }
-          } else {
-            listener.callback(begin, contactObject);
-          }
-        } else {
-          continue;
-        }
+        listener = this._contactListeners[i]
+        listener.callback(begin, Box2D.wrapPointer(contactPtr, Box2D.b2Contact))
       }
     }
   }
@@ -88,26 +76,36 @@ export default class World {
     this._contactListeners.push(l);
   }
 
-  newBodyContactListener(body, className, callback, addAlso){
-    var cl = new ContactListener(body, className, callback);
+  newBodyContactListener(callback, addAlso){
+    var cl = new ContactListener(callback)
 
     if(addAlso){
-      this.registerBodyContactListener(cl);
+      this.registerBodyContactListener(cl)
     }
 
-    return cl;
+    return cl
   }
 
   bodyInvolvedInContact(body, contactPtr){
-    var contact = Box2D.wrapPointer(contactPtr, Box2D.b2Contact);
-    var bodyA = contact.GetFixtureA().GetBody();
-    var bodyB = contact.GetFixtureB().GetBody();
+    let contact = Box2D.wrapPointer(contactPtr, Box2D.b2Contact)
+    let fixtureA = contact.GetFixtureA()
+    let bodyA = fixtureA.GetBody()
+    let fixtureB = contact.GetFixtureB()
+    let bodyB = fixtureB.GetBody()
     if(bodyA == body){
-      return bodyB;
+      return {
+        contact,
+        body: bodyB,
+        fixture: fixtureB,
+      }
     } else if(bodyB == body){
-      return bodyA;
+      return {
+        contact,
+        body: bodyA,
+        fixture: fixtureA,
+      }
     } else {
-      return false;
+      return false
     }
   }
 
@@ -132,14 +130,9 @@ export default class World {
 }
 
 class ContactListener {
-  constructor(body,className,callback) {
-    if(typeof className === 'function' ){
-      callback = className;
-      className = false;
-    }
-
-    this.body = body;
-    this.className = className;
-    this.callback = callback;
+  constructor(callback) {
+    this.callback = callback
   }
 }
+
+World.ContactListener = ContactListener
