@@ -1,5 +1,7 @@
-import Box2D from 'box2d/build/Box2D_v2.3.1_min.wasm.js'
-import b2bin from 'box2d/build/Box2D_v2.3.1_min.wasm.wasm'
+import Box2D from 'box2d.wasm.js'
+import b2bin from 'box2d.wasm.wasm'
+
+import { USER_DATA_MAP, ENTITY_MAP, CONTACT_ENABLED_MAP } from './maps.js'
 
 const definePropertiesForPrototype = function(pt){
   return function(property){
@@ -28,7 +30,9 @@ const definePropertiesForPrototype = function(pt){
   }
 }
 
-const b2d = Box2D({wasmBinary: b2bin}).then((b2)=>{
+let b2d = Box2D({wasmBinary: b2bin})
+console.log(b2d)
+b2d = b2d.then((b2)=>{
   // setup some helper stuff
 
   // define all the property getter/setters for modules that have them
@@ -60,7 +64,7 @@ const b2d = Box2D({wasmBinary: b2bin}).then((b2)=>{
     b2WheelJointDef: [ 'localAnchorA', 'localAnchorB', 'localAxisA', 'enableMotor', 'maxMotorTorque', 'motorSpeed', 'frequencyHz', 'dampingRatio' ],
     b2MotorJointDef: [ 'linearOffset', 'angularOffset', 'maxForce', 'maxTorque', 'correctionFactor' ],
     b2Manifold: ['localNormal', 'localPoint', 'type', 'pointCount'],
-    // b2WorldManifold: ['normal', 'points', 'separations'],
+    b2WorldManifold: ['normal', 'points', 'separations'],
     b2ManifoldPoint: ['localPoint', 'normalImpulse', 'tangentImpulse', 'id'],
     b2Filter: [ 'categoryBits', 'maskBits', 'groupIndex' ],
     b2Transform: ['q', 'p'],
@@ -84,18 +88,39 @@ const b2d = Box2D({wasmBinary: b2bin}).then((b2)=>{
   })
 
   // augment b2Body with propery user data values
+  // setup these using weakmaps
   Object.defineProperties(b2.b2Body.prototype, {
-    SetUserData: {
-      value(val){
-        this.__userData = val
-      }
-    },
     GetUserData: {
       value(){
-        return this.__userData
+        return USER_DATA_MAP.get(this)
+      }
+    },
+    SetUserData: {
+      value(val){
+        USER_DATA_MAP.set(this, val)
+      }
+    },
+    entity: {
+      get(){
+        return ENTITY_MAP.get(this)
+      },
+      set(val){
+        ENTITY_MAP.set(this, val)
+      },
+    },
+  })
+
+  // const IsEnabled = Object.getOwnPropertyDescriptor(b2.b2Contact.prototype, 'IsEnabled')
+  const SetEnabled = Object.getOwnPropertyDescriptor(b2.b2Contact.prototype, 'SetEnabled')
+  Object.defineProperties(b2.b2Contact.prototype, {
+    SetEnabled: {
+      value(enabled){
+        SetEnabled.value.call(this, enabled)
+        CONTACT_ENABLED_MAP.set(this, enabled)
       }
     }
   })
+
 
   // define the enums as the are in the def file
   const enums = {

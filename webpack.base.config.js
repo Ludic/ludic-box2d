@@ -35,26 +35,39 @@ module.exports = {
         test: /\.css$/,
         loader: "style!css",
       },
-      {
-        test: require.resolve('box2d/build/Box2D_v2.3.1_min.wasm.js'),
-        use: 'exports-loader?Box2D',
-      },
-      {
-        test: require.resolve('box2d/build/Box2D_v2.3.1_min.wasm.wasm'),
-        loaders: ['arraybuffer-loader'],
-      },
+      // {
+      //   test: require.resolve('@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js'),
+      //   use: 'exports-loader?Box2D',
+      // },
+      // {
+      //   test: require.resolve('@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm'),
+      //   loaders: ['arraybuffer-loader'],
+      // },
     ]
   },
   resolve: {
     alias: {
       src: path.resolve(__dirname, 'src/'),
+
       // 'box2d$': path.resolve(__dirname, 'node_modules/box2d/build/Box2d_v2.3.1_min.js')
     },
     extensions: ['.js', '.scss', '.json'],
+    // modules: [path.join(__dirname, 'node_modules'), 'node_modules'],
   },
   externals: {
     'box2d': 'box2d',
-    'ludic': 'ludic',
+    'ludic': {
+      commonjs: '@ludic/ludic',
+      commonjs2: '@ludic/ludic',
+    },
+    'box2d.wasm.js': {
+      commonjs: 'exports-loader?Box2D!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js',
+      commonjs2: 'exports-loader?Box2D!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js',
+    },
+    'box2d.wasm.wasm': {
+      commonjs: 'arraybuffer-loader!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm',
+      commonjs2: 'arraybuffer-loader!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm',
+    },
   },
   devtool: '#source-map'
 };

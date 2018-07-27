@@ -37,7 +37,8 @@
     "webpack-dev-server": "^2.2.0",
     "webpack-merge": "^4.1.0"
   },
-  "dependencies": {
-    "box2d": "github:ludic/box2d"
+  "peerDependencies": {
+    "@ludic/box2d": "^0.0.1",
+    "@ludic/ludic": "^1.0."
   }
 }
