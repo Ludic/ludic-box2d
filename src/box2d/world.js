@@ -1,5 +1,5 @@
 import Box2D from './box2d';
-import {utils} from 'ludic';
+import {utils} from '@ludic/ludic';
 import { CONTACT_ENABLED_MAP } from './maps'
 
 

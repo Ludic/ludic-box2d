@@ -2,9 +2,7 @@
  * ludic-box2d dev config
  */
 
-
 var path = require('path');
-// var fs = require('fs');
 
 module.exports = {
   entry: "./src/main.js",
@@ -56,17 +54,17 @@ module.exports = {
   },
   externals: {
     'box2d': 'box2d',
-    'ludic': {
+    '@ludic/ludic': {
       commonjs: '@ludic/ludic',
       commonjs2: '@ludic/ludic',
     },
     'box2d.wasm.js': {
-      commonjs: 'exports-loader?Box2D!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js',
-      commonjs2: 'exports-loader?Box2D!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js',
+      commonjs: '@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js',
+      commonjs2: '@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js',
     },
     'box2d.wasm.wasm': {
-      commonjs: 'arraybuffer-loader!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm',
-      commonjs2: 'arraybuffer-loader!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm',
+      commonjs: '@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm',
+      commonjs2: '@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm',
     },
   },
   devtool: '#source-map'

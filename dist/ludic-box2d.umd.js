@@ -1,10 +1,10 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("@ludic/ludic"), require("arraybuffer-loader!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm"), require("exports-loader?Box2D!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js"));
+		module.exports = factory(require("@ludic/ludic"), require("@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js"), require("file-loader!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm"));
 	else if(typeof define === 'function' && define.amd)
 		define([, , ], factory);
 	else if(typeof exports === 'object')
-		exports["ludic-box2d"] = factory(require("@ludic/ludic"), require("arraybuffer-loader!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm"), require("exports-loader?Box2D!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js"));
+		exports["ludic-box2d"] = factory(require("@ludic/ludic"), require("@ludic/box2d/build/Box2D_v2.3.1_min.wasm.js"), require("file-loader!@ludic/box2d/build/Box2D_v2.3.1_min.wasm.wasm"));
 	else
 		root["ludic-box2d"] = factory(root[undefined], root[undefined], root[undefined]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__) {
@@ -81,9 +81,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_box2d_wasm_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_box2d_wasm_js__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_box2d_wasm_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_box2d_wasm_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_box2d_wasm_wasm__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_box2d_wasm_wasm__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_box2d_wasm_wasm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_box2d_wasm_wasm__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__maps_js__ = __webpack_require__(4);
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -124,9 +124,9 @@ var definePropertiesForPrototype = function definePropertiesForPrototype(pt) {
   };
 };
 
-var b2d = __WEBPACK_IMPORTED_MODULE_0_box2d_wasm_js___default()({ wasmBinary: __WEBPACK_IMPORTED_MODULE_1_box2d_wasm_wasm___default.a });
-console.log(b2d);
-b2d = b2d.then(function (b2) {
+/* harmony default export */ __webpack_exports__["a"] = __WEBPACK_IMPORTED_MODULE_0_box2d_wasm_js___default()({ locateFile: function locateFile(path) {
+    return path.endsWith('wasm') && __WEBPACK_IMPORTED_MODULE_1_box2d_wasm_wasm___default.a || path;
+  } }).then(function (b2) {
   // setup some helper stuff
 
   // define all the property getter/setters for modules that have them
@@ -243,7 +243,6 @@ b2d = b2d.then(function (b2) {
 
   return b2;
 });
-/* harmony default export */ __webpack_exports__["a"] = b2d;
 
 /***/ }),
 /* 1 */
@@ -863,8 +862,8 @@ var CONTACT_ENABLED_MAP = new WeakMap();
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__box2d__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ludic__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ludic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ludic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ludic_ludic__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ludic_ludic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ludic_ludic__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -879,7 +878,7 @@ var DebugDraw = function () {
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
         this.debugDraw = this.getCanvasDebugDraw();
-        __WEBPACK_IMPORTED_MODULE_1_ludic__["utils"].using(this, this.debugDraw, true);
+        __WEBPACK_IMPORTED_MODULE_1__ludic_ludic__["utils"].using(this, this.debugDraw, true);
     }
 
     _createClass(DebugDraw, [{
@@ -1066,8 +1065,8 @@ DebugDraw.e_centerOfMassBit = 0x0010;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__box2d__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ludic__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ludic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ludic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ludic_ludic__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ludic_ludic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ludic_ludic__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__maps__ = __webpack_require__(4);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -1091,7 +1090,7 @@ var World = function () {
     }
 
     this.world = new __WEBPACK_IMPORTED_MODULE_0__box2d__["a" /* default */].b2World(b2Vec2);
-    __WEBPACK_IMPORTED_MODULE_1_ludic__["utils"].using(this, this.world);
+    __WEBPACK_IMPORTED_MODULE_1__ludic_ludic__["utils"].using(this, this.world);
     this.enableStep();
 
     // contact stuff
@@ -1333,8 +1332,8 @@ var RubeAssetLoader = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ludic__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ludic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_ludic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ludic_ludic__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ludic_ludic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ludic_ludic__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__RubeLoader__ = __webpack_require__(2);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -1434,7 +1433,7 @@ var RubeAsset = function (_Asset) {
   }]);
 
   return RubeAsset;
-}(__WEBPACK_IMPORTED_MODULE_0_ludic__["Asset"]);
+}(__WEBPACK_IMPORTED_MODULE_0__ludic_ludic__["Asset"]);
 
 /* harmony default export */ __webpack_exports__["a"] = RubeAsset;
 
@@ -1443,8 +1442,8 @@ var RubeAsset = function (_Asset) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ludic__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ludic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_ludic__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ludic_ludic__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ludic_ludic___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ludic_ludic__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -1541,7 +1540,7 @@ var RubeImageAsset = function (_Asset) {
   }]);
 
   return RubeImageAsset;
-}(__WEBPACK_IMPORTED_MODULE_0_ludic__["Asset"]);
+}(__WEBPACK_IMPORTED_MODULE_0__ludic_ludic__["Asset"]);
 
 /* harmony default export */ __webpack_exports__["a"] = RubeImageAsset;
 

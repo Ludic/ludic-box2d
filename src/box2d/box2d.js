@@ -30,9 +30,7 @@ const definePropertiesForPrototype = function(pt){
   }
 }
 
-let b2d = Box2D({wasmBinary: b2bin})
-console.log(b2d)
-b2d = b2d.then((b2)=>{
+export default Box2D({locateFile: path => (path.endsWith('wasm') && b2bin) || path}).then((b2)=>{
   // setup some helper stuff
 
   // define all the property getter/setters for modules that have them
@@ -142,4 +140,3 @@ b2d = b2d.then((b2)=>{
 
   return b2
 })
-export default b2d

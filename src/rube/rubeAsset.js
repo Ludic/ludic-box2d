@@ -1,4 +1,4 @@
-import {Asset} from 'ludic';
+import {Asset} from '@ludic/ludic';
 import RubeLoader from './RubeLoader';
 
 class RubeAsset extends Asset {

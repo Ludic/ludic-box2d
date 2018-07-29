@@ -1,4 +1,4 @@
-import {Asset} from 'ludic';
+import {Asset} from '@ludic/ludic';
 
 
 // TODO: get this from some config
